@@ -1,0 +1,36 @@
+<div>
+  <md-toolbar color="primary">
+    <h1>Pokedex</h1>
+
+    <span class="spacer"></span>
+
+    <button md-icon-button [md-menu-trigger-for]="menu">
+      <md-icon>more_vert</md-icon>
+    </button>
+  </md-toolbar>
+
+  <md-menu x-position="before" #menu="mdMenu">
+    <button md-menu-item>
+      <md-icon>dialpad</md-icon>
+      <span>Dialpad</span>
+    </button>
+
+    <button md-menu-item>
+      <md-icon>voicemail</md-icon>
+      <span>Voicemail</span>
+    </button>
+  </md-menu>
+
+  <md-list>
+    <md-list-item layout-wrap *ngFor="let pokemon of pokemons">
+      <img md-list-avatar src="https://i.vimeocdn.com/portrait/58832_300x300" />
+      <h3 md-line>{{pokemon.name}}</h3>
+      <p md-line>
+        {{pokemon.id}}
+      </p>
+      <button md-mini-fab [class.selected]="pokemon === selectedPokemon" (click)="onSelect(pokemon)"><md-icon>search</md-icon></button>
+    </md-list-item>
+  </md-list>
+
+  <pokemonDetail [pokemon]="selectedPokemon"></pokemonDetail>
+</div>

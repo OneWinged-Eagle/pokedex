@@ -1,0 +1,10 @@
+.card-header-image
+{
+  background-image: url("https://i.vimeocdn.com/portrait/58832_300x300");
+  background-size: cover;
+}
+
+.spacer
+{
+  flex: 1 1 auto;
+}
