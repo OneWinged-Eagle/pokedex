@@ -5,7 +5,7 @@ import { MaterialModule } from "@angular/material";
 import { NgModule } from "@angular/core";
 
 import { PokedexComponent } from "./pokedex.component";
-import { PokemonDetailComponent } from "./pokemonDetail.component";
+import { PokemonDetailComponent } from "./pokemon/pokemonDetail.component";
 
 @NgModule(
 {

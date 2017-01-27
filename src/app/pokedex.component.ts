@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Pokemon } from "./pokemon";
-import { PokemonService } from "./pokemon.service";
+import { Pokemon } from "./pokemon/pokemon";
+import { PokemonService } from "./pokemon/pokemon.service";
 
 @Component(
 {
@@ -20,7 +20,11 @@ export class PokedexComponent implements OnInit
 
   getPokemons(): void
   {
-    this.pokemonService.getPokemons().then(pokemons => this.pokemons = pokemons);
+    this.pokemonService.getPokemons()
+                        .subscribe(
+                          pokemons => this.pokemons = pokemons,
+                          err => { console.log(err); }
+                        );
   }
 
   ngOnInit(): void
