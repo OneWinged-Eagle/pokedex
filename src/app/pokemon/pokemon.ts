@@ -11,7 +11,7 @@ export class Pokemon
   };
   cname: string;
   ename: string;
-  id: number;
+  id: string;
   jname: string;
   skills:
   {

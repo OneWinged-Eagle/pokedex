@@ -1,0 +1,10 @@
+.card
+{
+  margin: 0 auto;
+  width: 50%;
+}
+
+.card-header-image
+{
+  background-size: cover;
+}

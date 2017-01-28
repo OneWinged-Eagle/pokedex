@@ -2,18 +2,18 @@ import { Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 
-import { Pokemon } from "./pokemon";
+import { Skill } from "./skill";
 
 @Injectable()
-export class PokemonService
+export class SkillsService
 {
-  private pokemonsUrl : string = "/data/pokedex.json";
+  private skillsUrl : string = "/data/skills.json";
 
   constructor(private http: Http) {}
 
-  getPokemons(): Observable<Pokemon[]>
+  getSkills(): Observable<Skill[]>
   {
-    return this.http.request(this.pokemonsUrl)
+    return this.http.request(this.skillsUrl)
                     .map((res: Response) => res.json())
                     .catch((error: any) => Observable.throw(error.json().error || "Server error"));
   }

@@ -5,14 +5,19 @@ import { MaterialModule } from "@angular/material";
 import { NgModule } from "@angular/core";
 
 import { PokedexComponent } from "./pokedex.component";
-import { PokemonDetailComponent } from "./pokemon/pokemonDetail.component";
+import { PokemonDetailsComponent } from "./pokemonDetails/pokemonDetails.component";
+
+import { FilterByPipe } from "./pipes/filterBy.pipe";
+import { SortByPipe } from "./pipes/sortBy.pipe";
 
 @NgModule(
 {
   declarations:
   [
     PokedexComponent,
-    PokemonDetailComponent
+    PokemonDetailsComponent,
+    FilterByPipe,
+    SortByPipe
   ],
   imports:
   [
