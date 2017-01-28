@@ -36,14 +36,14 @@ export class SortByPipe implements PipeTransform
             sorting = -1;
           break;
 
-        case "type1":
+        case "type1": // TODO: sort by english type
           if (pokemon1.type[0] > pokemon2.type[0])
             sorting = 1;
           else if (pokemon1.type[0] < pokemon2.type[0])
             sorting = -1;
           break;
 
-        case "type2":
+        case "type2": // TODO: sort by english type
           if (pokemon1.type[1] > pokemon2.type[1])
             sorting = -1;
           else if (pokemon1.type[1] < pokemon2.type[1])

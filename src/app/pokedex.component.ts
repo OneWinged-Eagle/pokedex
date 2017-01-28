@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { animate, trigger, state, transition, style, Component, OnInit } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
 
 import { Pokemon } from "./pokemon/pokemon";
 import { PokemonsService } from "./pokemon/pokemons.service";
@@ -14,6 +15,19 @@ import { TypesService } from "./type/types.service";
   selector: "pokedex",
   templateUrl: "./pokedex.component.html",
   styleUrls: ["./pokedex.component.css"],
+  animations: [
+    trigger("pokemonSelected", [
+      state("in", style({ height: "*" })),
+      transition("* => void", [
+        style({ height: "*" }),
+        animate(250, style({ height: 0 }))
+      ]),
+      transition("void => *", [
+        style({ height: 0 }),
+        animate(250, style({ height: "*" }))
+      ])
+    ])
+  ],
   providers:
   [
     PokemonsService,
@@ -24,21 +38,26 @@ import { TypesService } from "./type/types.service";
 
 export class PokedexComponent implements OnInit
 {
-  pokemons: Pokemon[];
+  pokemons: Pokemon[] = [];
   skills: Skill[];
   types: Type[];
 
   toSort: string;
   sortingType: string;
 
-  constructor(private pokemonsService: PokemonsService, private skillsService: SkillsService, private typesService: TypesService) {}
+  constructor(private pokemonsService: PokemonsService, private skillsService: SkillsService, private typesService: TypesService, private sanitizer: DomSanitizer) {}
 
   getPokemons(): void
   {
     this.pokemonsService.getPokemons()
                         .subscribe(
-                          pokemons => this.pokemons = pokemons,
-                          err => { console.log(err); }
+                          pokemons =>
+                          {
+                            for (let pokemonJson of pokemons)
+                              this.pokemons.push(new Pokemon(pokemonJson, this.sanitizer));
+                          },
+                          err => console.log(err),
+                          () => console.log("All pokemons gotten!")
                         );
   }
 
@@ -47,7 +66,8 @@ export class PokedexComponent implements OnInit
     this.skillsService.getSkills()
                         .subscribe(
                           skills => this.skills = skills,
-                          err => { console.log(err); }
+                          err => console.log(err),
+                          () => console.log("All skills gotten!")
                         );
   }
 
@@ -56,7 +76,8 @@ export class PokedexComponent implements OnInit
     this.typesService.getTypes()
                         .subscribe(
                           types => this.types = types,
-                          err => { console.log(err); }
+                          err => console.log(err),
+                          () => console.log("All types gotten!")
                         );
   }
 
@@ -71,11 +92,5 @@ export class PokedexComponent implements OnInit
   {
     this.toSort = toSort;
     this.sortingType = sortingType;
-  }
-
-  onSelect(pokemon: Pokemon): void
-  {
-    // unexpand all
-    // expand pokemon.id
   }
 }

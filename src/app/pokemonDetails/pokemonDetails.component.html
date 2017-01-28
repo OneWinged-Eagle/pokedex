@@ -1,15 +1,37 @@
-<md-card class="card" *ngIf="pokemon">
+<md-card *ngIf="pokemon">
   <md-card-header>
-    <div md-card-avatar class="card-header-image" [style.background-image]="getSprite()"></div>
-    <md-card-title>{{pokemon.ename}}</md-card-title>
-    <md-card-subtitle>{{pokemon.id}}</md-card-subtitle>
+    <div md-card-avatar class="card-header-image" [style.background-image]="pokemon.getSprite()"></div>
+    <md-card-title>{{pokemon.id}} &#x000B7; {{pokemon.ename}} &#x000B7; {{pokemon.jname}} &#x000B7; {{pokemon.cname}}</md-card-title>
+    <md-card-subtitle>{{pokemon.type[0]}}<span *ngIf="pokemon.type[1]"> &#x02013; {{pokemon.type[1]}}</span></md-card-subtitle>
   </md-card-header>
 
-  <img md-card-image class="card-image" src="/images/img/{{pokemon.id}}{{pokemon.ename}}.png" />
+  <img md-card-image class="card-image" [src]="pokemon.getImg('img')" />
 
   <md-card-content>
-    <p>
-      Lorem ipsum.
-    </p>
+    <md-grid-list cols="2" rowHeight="2rem">
+      <md-grid-tile>
+        Base HP : {{pokemon.base.HP}}
+      </md-grid-tile>
+
+      <md-grid-tile>
+        Base speed : {{pokemon.base.Speed}}
+      </md-grid-tile>
+
+      <md-grid-tile>
+        Base attack : {{pokemon.base.Attack}}
+      </md-grid-tile>
+
+      <md-grid-tile>
+        Base defense : {{pokemon.base.Defense}}
+      </md-grid-tile>
+
+      <md-grid-tile>
+        Base base special attack : {{pokemon.base["Sp.Atk"]}}
+      </md-grid-tile>
+
+      <md-grid-tile>
+        Base special defense : {{pokemon.base["Sp.Def"]}}
+      </md-grid-tile>
+    </md-grid-list>
   </md-card-content>
 </md-card>

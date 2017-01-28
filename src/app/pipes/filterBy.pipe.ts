@@ -24,12 +24,15 @@ export class FilterByPipe implements PipeTransform
           filtring = (pokemon.id.toLowerCase().indexOf(filter.toLowerCase()) !== -1);
           break;
 
-        case "type1":
+        case "type1": // TODO: filter by english type
           filtring = (pokemon.type[0].toLowerCase().indexOf(filter.toLowerCase()) !== -1);
           break;
 
-        case "type2":
-          filtring = (pokemon.type[1].toLowerCase().indexOf(filter.toLowerCase()) !== -1);
+        case "type2": // TODO: filter by english type
+          if (pokemon.type[1] === undefined)
+            filtring = (filter === "");
+          else
+            filtring = (pokemon.type[1].toLowerCase().indexOf(filter.toLowerCase()) !== -1);
           break;
         }
 

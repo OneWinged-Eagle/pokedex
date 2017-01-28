@@ -1,1 +1,48 @@
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+# Pokedex
+GitHub repository of a simple pokedex application using AngularJS2 and Material2
+
+Hello wonderful people!
+
+If you wanna get this magnificent pokedex and run it, follow these steps:
+
+### NPM
+
+To use this application, running on AngularJS2, you'll need the node package manager, or npm in short.
+To get it, simply download it and follow installation procedures (you can find it easily on the [NodeJS website](https://nodejs.org)).
+
+If you already have npm installed, just update it:
+```bash
+npm install -g npm@latest
+```
+
+And then, be sure to install angular-cli (or update it):
+```bash
+npm install -g angular-cli
+```
+
+### Getting the project
+
+Well, just download directly from [there](https://github.com/Thuwa77/pokedex/archive/master.zip) and unzip the archive, or you can clone it via git:
+```bash
+git clone https://github.com/Thuwa77/pokedex.git [directory_name]
+```
+Do note that the directory_name is optional and set to "pokedex" by default.
+
+### Installing dependencies
+
+Once you're at the root of the pokedex application, run:
+```bash
+npm install
+```
+And wait a moment...
+
+### Running the application
+
+Finally, you can run the application! While in the root folder, simply launch the service via:
+```bash
+npm start
+```
+Do note that `npm start` just run the `ng serve` command, so you can interchangeably use `npm start` or `ng serve`, as you prefer.
+Second note: the default port is 4200, be sure that no application currently runs with this port, or kill it!
+
+Once the server launched, just go to [localhost:4200](http://localhost:4200) and voilà!

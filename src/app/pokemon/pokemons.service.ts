@@ -11,7 +11,7 @@ export class PokemonsService
 
   constructor(private http: Http) {}
 
-  getPokemons(): Observable<Pokemon[]>
+  getPokemons()
   {
     return this.http.request(this.pokemonsUrl)
                     .map((res: Response) => res.json())
