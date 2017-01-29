@@ -1,101 +1,101 @@
-<div>
-  <md-toolbar color="primary">
-    <h1>Pokedex</h1>
+<md-toolbar color="primary">
+  <h1>Pokedex</h1>
 
-    <span class="spacer"></span>
+  <span class="spacer"></span>
 
-    <md-input-container dividerColor="accent">
-      <input md-input placeholder="Search a pokemon by name" [(ngModel)]="name"/>
-    </md-input-container>
+  <md-input-container dividerColor="accent">
+    <input md-input placeholder="Search by name" [(ngModel)]="name"/>
+  </md-input-container>
 
-    <span class="spacer"></span>
+  <span class="spacer"></span>
 
-    <button md-icon-button [md-menu-trigger-for]="menu">
-      <md-icon>more_vert</md-icon>
-    </button>
-  </md-toolbar>
+  <button md-icon-button [md-menu-trigger-for]="menu">
+    <md-icon>more_vert</md-icon>
+  </button>
+</md-toolbar>
 
-  <md-menu x-position="before" #menu="mdMenu">
-    <button md-menu-item (click)="sortBy('ename', 'ASC')">
-      <md-icon>swap_vert</md-icon>
+<md-menu x-position="before" #menu="mdMenu">
+  <button md-menu-item (click)="sortBy('ename', true)">
+    <md-icon>swap_vert</md-icon>
 
-      <span>name asc</span>
-    </button>
+    <span>name asc</span>
+  </button>
 
-    <button md-menu-item (click)="sortBy('ename', 'DESC')">
-      <md-icon>swap_vert</md-icon>
+  <button md-menu-item (click)="sortBy('ename', false)">
+    <md-icon>swap_vert</md-icon>
 
-      <span>name desc</span>
-    </button>
+    <span>name desc</span>
+  </button>
 
-    <button md-menu-item (click)="sortBy('id', 'ASC')">
-      <md-icon>swap_vert</md-icon>
+  <button md-menu-item (click)="sortBy('id', true)">
+    <md-icon>swap_vert</md-icon>
 
-      <span>id asc</span>
-    </button>
+    <span>id asc</span>
+  </button>
 
-    <button md-menu-item (click)="sortBy('id', 'DESC')">
-      <md-icon>swap_vert</md-icon>
+  <button md-menu-item (click)="sortBy('id', false)">
+    <md-icon>swap_vert</md-icon>
 
-      <span>id desc</span>
-    </button>
+    <span>id desc</span>
+  </button>
 
-    <button md-menu-item (click)="sortBy('type1', 'ASC')">
-      <md-icon>swap_vert</md-icon>
+  <button md-menu-item (click)="sortBy('type1', true)">
+    <md-icon>swap_vert</md-icon>
 
-      <span>type 1 asc</span>
-    </button>
+    <span>first type asc</span>
+  </button>
 
-    <button md-menu-item (click)="sortBy('type1', 'DESC')">
-      <md-icon>swap_vert</md-icon>
+  <button md-menu-item (click)="sortBy('type1', false)">
+    <md-icon>swap_vert</md-icon>
 
-      <span>type 1 desc</span>
-    </button>
+    <span>first type desc</span>
+  </button>
 
-    <button md-menu-item (click)="sortBy('type2', 'ASC')">
-      <md-icon>swap_vert</md-icon>
+  <button md-menu-item (click)="sortBy('type2', true)">
+    <md-icon>swap_vert</md-icon>
 
-      <span>type 2 asc</span>
-    </button>
+    <span>second type asc</span>
+  </button>
 
-    <button md-menu-item (click)="sortBy('type2', 'DESC')">
-      <md-icon>swap_vert</md-icon>
+  <button md-menu-item (click)="sortBy('type2', false)">
+    <md-icon>swap_vert</md-icon>
 
-      <span>type 2 desc</span>
-    </button>
-  </md-menu>
+    <span>second type desc</span>
+  </button>
+</md-menu>
 
-  <md-toolbar color="primary">
-    <md-input-container dividerColor="accent">
-      <input md-input placeholder="Search a pokemon by id" [(ngModel)]="id">
-    </md-input-container>
+<md-toolbar color="primary">
+  <md-input-container dividerColor="accent">
+    <input md-input placeholder="Search by id" [(ngModel)]="id">
+  </md-input-container>
 
-    <span class="spacer"></span>
+  <span class="spacer"></span>
 
-    <md-input-container dividerColor="accent">
-      <input md-input placeholder="Search a pokemon by type 1" [(ngModel)]="type1">
-    </md-input-container>
+  <md-input-container dividerColor="accent">
+    <input md-input placeholder="Search by first type" [(ngModel)]="type1">
+  </md-input-container>
 
-    <span class="spacer"></span>
+  <span class="spacer"></span>
 
-    <md-input-container dividerColor="accent">
-      <input md-input placeholder="Search a pokemon by type 2" [(ngModel)]="type2">
-    </md-input-container>
-  </md-toolbar>
+  <md-input-container dividerColor="accent">
+    <input md-input placeholder="Search by second type" [(ngModel)]="type2">
+  </md-input-container>
+</md-toolbar>
 
-  <md-nav-list>
-    <div *ngFor="let pokemon of (pokemons | filterBy:'ename':name | filterBy:'id':id | filterBy:'type1':type1 | filterBy:'type2':type2 | sortBy:toSort:sortingType)">
-      <md-list-item (click)="pokemon.toggleSelected()">
-        <img md-list-avatar [src]="pokemon.getImg('thm')" />
+<md-nav-list>
+  <span *ngFor="let pokemon of (pokemons | filterBy:'ename':name | filterBy:'id':id | filterBy:'type1':type1 | filterBy:'type2':type2 | sortBy:toSort:asc)">
+    <md-list-item (click)="pokemon.toggleSelected()">
+      <img md-list-avatar [src]="pokemon.getImg('thm')" />
 
-        <h3 md-line>{{pokemon.id}} &#x000B7; {{pokemon.ename}}</h3>
+      <h3 md-line>{{pokemon.id}} &#x000B7; {{pokemon.ename}}</h3>
 
-        <p md-line>
-          {{pokemon.type[0]}}<span *ngIf="pokemon.type[1]"> &#x02013; {{pokemon.type[1]}}</span>
-        </p>
-      </md-list-item>
+      <p md-line>
+        {{pokemon.type1}}<span *ngIf="pokemon.type2"> &#x02013; {{pokemon.type2}}</span>
+      </p>
+    </md-list-item>
 
-      <pokemonDetails [@pokemonSelected]="pokemon.selected" *ngIf="pokemon.selected" [pokemon]="pokemon" [skills]="skills" [types]="types"></pokemonDetails>
+    <div [@pokemonSelected]="pokemon.selected">
+      <pokemonDetails *ngIf="pokemon.selected" [pokemon]="pokemon"></pokemonDetails>
     </div>
-  </md-nav-list>
-</div>
+  </span>
+</md-nav-list>

@@ -8,7 +8,7 @@ If you wanna get this magnificent pokedex and run it, follow these steps:
 ### NPM
 
 To use this application, running on AngularJS2, you'll need the node package manager, or npm in short.
-To get it, simply download it and follow installation procedures (you can find it easily on the [NodeJS website](https://nodejs.org)).
+To get it, simply download it and follow the installation procedures (you can find it easily on the [NodeJS website](https://nodejs.org)).
 
 If you already have npm installed, just update it:
 ```bash
@@ -42,7 +42,9 @@ Finally, you can run the application! While in the root folder, simply launch th
 ```bash
 npm start
 ```
-Do note that `npm start` just run the `ng serve` command, so you can interchangeably use `npm start` or `ng serve`, as you prefer.
+Do note that `npm start` just run the `ng serve` command, so you can interchangeably use `npm start` or `ng serve`, as you like.
 Second note: the default port is 4200, be sure that no application currently runs with this port, or kill it!
 
-Once the server launched, just go to [localhost:4200](http://localhost:4200) and voilà!
+Once the server is launched, just go to [localhost:4200](http://localhost:4200) and voilà!
+
+Oh, and if you like to run some tests, the command is simply `npm test`, but right now I can't seem to get it working... If you know how to, please do tell me!

@@ -2,19 +2,17 @@ import { Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 
+import { ServicesHelper } from "../helpers/services.helper";
+
 import { Type } from "./type";
 
 @Injectable()
-export class TypesService
+export class TypesService extends ServicesHelper
 {
-  private typesUrl : string = "/data/types.json";
-
-  constructor(private http: Http) {}
-
-  getTypes(): Observable<Type[]>
+  constructor(http: Http)
   {
-    return this.http.request(this.typesUrl)
-                    .map((res: Response) => res.json())
-                    .catch((error: any) => Observable.throw(error.json().error || "Server error"));
+    super(http, "/data/types.json");
   }
+
+  getTypes(): Observable<any> { return this.getData(); }
 }

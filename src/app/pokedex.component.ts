@@ -1,5 +1,6 @@
 import { animate, trigger, state, transition, style, Component, OnInit } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
+import { Observable } from "rxjs/Rx";
 
 import { Pokemon } from "./pokemon/pokemon";
 import { PokemonsService } from "./pokemon/pokemons.service";
@@ -17,15 +18,18 @@ import { TypesService } from "./type/types.service";
   styleUrls: ["./pokedex.component.css"],
   animations: [
     trigger("pokemonSelected", [
-      state("in", style({ height: "*" })),
-      transition("* => void", [
+      state("true", style({ height: "*" })),
+      state("false", style({ height: 0 })),
+      transition("1 => 0",
+      [
         style({ height: "*" }),
-        animate(250, style({ height: 0 }))
+        animate(200, style({ height: 0 }))
       ]),
-      transition("void => *", [
+      transition("0 => 1",
+      [
         style({ height: 0 }),
-        animate(250, style({ height: "*" }))
-      ])
+        animate(200, style({ height: "*" }))
+      ]),
     ])
   ],
   providers:
@@ -39,58 +43,41 @@ import { TypesService } from "./type/types.service";
 export class PokedexComponent implements OnInit
 {
   pokemons: Pokemon[] = [];
-  skills: Skill[];
+  skills: Skill[] = [];
   types: Type[];
 
   toSort: string;
-  sortingType: string;
+  asc: boolean;
 
   constructor(private pokemonsService: PokemonsService, private skillsService: SkillsService, private typesService: TypesService, private sanitizer: DomSanitizer) {}
 
-  getPokemons(): void
+  getData(): void
   {
-    this.pokemonsService.getPokemons()
-                        .subscribe(
-                          pokemons =>
-                          {
-                            for (let pokemonJson of pokemons)
-                              this.pokemons.push(new Pokemon(pokemonJson, this.sanitizer));
-                          },
-                          err => console.log(err),
-                          () => console.log("All pokemons gotten!")
-                        );
-  }
+    Observable.forkJoin(this.pokemonsService.getPokemons(), this.skillsService.getSkills(), this.typesService.getTypes())
+              .subscribe(
+                data =>
+                {
+                  this.types = data[2];
 
-  getSkills(): void
-  {
-    this.skillsService.getSkills()
-                        .subscribe(
-                          skills => this.skills = skills,
-                          err => console.log(err),
-                          () => console.log("All skills gotten!")
-                        );
-  }
+                  for (let skillJson of data[1])
+                    this.skills.push(new Skill(skillJson));
 
-  getTypes(): void
-  {
-    this.typesService.getTypes()
-                        .subscribe(
-                          types => this.types = types,
-                          err => console.log(err),
-                          () => console.log("All types gotten!")
-                        );
+                  for (let pokemonJson of data[0])
+                    this.pokemons.push(new Pokemon(pokemonJson, this.skills, this.types, this.sanitizer));
+                },
+                err => console.log(err),
+                () => console.log("All data gotten!")
+              )
   }
 
   ngOnInit(): void
   {
-    this.getPokemons();
-    this.getSkills();
-    this.getTypes();
+    this.getData();
   }
 
-  sortBy(toSort: string, sortingType: string): void
+  sortBy(toSort: string, asc: boolean): void
   {
     this.toSort = toSort;
-    this.sortingType = sortingType;
+    this.asc = asc;
   }
 }

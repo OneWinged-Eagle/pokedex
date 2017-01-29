@@ -2,19 +2,17 @@ import { Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 
+import { ServicesHelper } from "../helpers/services.helper";
+
 import { Skill } from "./skill";
 
 @Injectable()
-export class SkillsService
+export class SkillsService extends ServicesHelper
 {
-  private skillsUrl : string = "/data/skills.json";
-
-  constructor(private http: Http) {}
-
-  getSkills(): Observable<Skill[]>
+  constructor(http: Http)
   {
-    return this.http.request(this.skillsUrl)
-                    .map((res: Response) => res.json())
-                    .catch((error: any) => Observable.throw(error.json().error || "Server error"));
+    super(http, "/data/skills.json");
   }
+
+  getSkills(): Observable<any> { return this.getData(); }
 }

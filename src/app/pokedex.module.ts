@@ -8,6 +8,7 @@ import { PokedexComponent } from "./pokedex.component";
 import { PokemonDetailsComponent } from "./pokemonDetails/pokemonDetails.component";
 
 import { FilterByPipe } from "./pipes/filterBy.pipe";
+import { KeysPipe } from "./pipes/keys.pipe";
 import { SortByPipe } from "./pipes/sortBy.pipe";
 
 @NgModule(
@@ -17,7 +18,8 @@ import { SortByPipe } from "./pipes/sortBy.pipe";
     PokedexComponent,
     PokemonDetailsComponent,
     FilterByPipe,
-    SortByPipe
+    SortByPipe,
+    KeysPipe
   ],
   imports:
   [

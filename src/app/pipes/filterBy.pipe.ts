@@ -2,9 +2,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 
 import { Pokemon } from "../pokemon/pokemon";
 
-@Pipe({
-  name: "filterBy"
-})
+@Pipe({ name: "filterBy" })
 export class FilterByPipe implements PipeTransform
 {
   transform(pokemons: Pokemon[], toFilter: string, filter: string): Pokemon[]
@@ -12,31 +10,7 @@ export class FilterByPipe implements PipeTransform
     if (pokemons !== undefined && toFilter !== undefined && filter !== undefined)
       return pokemons.filter(pokemon =>
       {
-        let filtring: boolean = true;
-
-        switch (toFilter)
-        {
-        case "ename":
-          filtring = (pokemon.ename.toLowerCase().indexOf(filter.toLowerCase()) !== -1);
-          break;
-
-        case "id":
-          filtring = (pokemon.id.toLowerCase().indexOf(filter.toLowerCase()) !== -1);
-          break;
-
-        case "type1": // TODO: filter by english type
-          filtring = (pokemon.type[0].toLowerCase().indexOf(filter.toLowerCase()) !== -1);
-          break;
-
-        case "type2": // TODO: filter by english type
-          if (pokemon.type[1] === undefined)
-            filtring = (filter === "");
-          else
-            filtring = (pokemon.type[1].toLowerCase().indexOf(filter.toLowerCase()) !== -1);
-          break;
-        }
-
-        return filtring;
+        return (pokemon[toFilter].toLowerCase().indexOf(filter.toLowerCase()) !== -1);
       });
     return pokemons;
   }

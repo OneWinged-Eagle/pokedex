@@ -2,19 +2,17 @@ import { Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 
+import { ServicesHelper } from "../helpers/services.helper";
+
 import { Pokemon } from "./pokemon";
 
 @Injectable()
-export class PokemonsService
+export class PokemonsService extends ServicesHelper
 {
-  private pokemonsUrl : string = "/data/pokedex.json";
-
-  constructor(private http: Http) {}
-
-  getPokemons()
+  constructor(http: Http)
   {
-    return this.http.request(this.pokemonsUrl)
-                    .map((res: Response) => res.json())
-                    .catch((error: any) => Observable.throw(error.json().error || "Server error"));
+    super(http, "/data/pokedex.json");
   }
+
+  getPokemons(): Observable<any> { return this.getData(); }
 }
