@@ -21,6 +21,6 @@ export class Skill extends SerializableHelper
 
   getDescription(): string
   {
-    return this.id + " - " + this.ename + ": " + this.type + " move with " + (this.power === null ? "no" : this.power) + " power and " + (this.accuracy === null ? "no" : this.accuracy + "%") + " accuracy (" + this.pp + " uses)";
+    return this.type + ", " + (this.power === null ? "no" : this.power) + " power, " + (this.accuracy === null ? "no" : this.accuracy + "%") + " accuracy, " + this.pp + " PP";
   }
 }

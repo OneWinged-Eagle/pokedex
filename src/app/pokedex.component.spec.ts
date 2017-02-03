@@ -5,7 +5,8 @@ import { MaterialModule } from "@angular/material";
 import {} from "jasmine";
 
 import { PokedexComponent } from "./pokedex.component";
-import { PokemonDetailsComponent } from "./pokemonDetails/pokemonDetails.component";
+
+import { PokemonComponent } from "./pokemon.component/pokemon.component";
 
 import { FilterByPipe } from "./pipes/filterBy.pipe";
 import { KeysPipe } from "./pipes/keys.pipe";
@@ -20,7 +21,7 @@ describe("PokedexComponent", () =>
       declarations:
       [
         PokedexComponent,
-        PokemonDetailsComponent,
+        PokemonComponent,
         FilterByPipe,
         SortByPipe,
         KeysPipe

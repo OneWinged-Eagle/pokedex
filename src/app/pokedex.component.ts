@@ -1,5 +1,4 @@
-import { animate, trigger, state, transition, style, Component, OnInit } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
+import { animate, state, style, transition, trigger, Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 
 import { Pokemon } from "./pokemon/pokemon";
@@ -17,19 +16,18 @@ import { TypesService } from "./type/types.service";
   templateUrl: "./pokedex.component.html",
   styleUrls: ["./pokedex.component.css"],
   animations: [
-    trigger("pokemonSelected", [
-      state("true", style({ height: "*" })),
-      state("false", style({ height: 0 })),
-      transition("1 => 0",
+    trigger("pkmInOut", [
+      state("in", style({ transform: "translateX(0)" })),
+      transition(":enter",
       [
-        style({ height: "*" }),
-        animate(200, style({ height: 0 }))
+        style({ opacity: 0, transform: "translateX(100%)", offset: 0}),
+        animate(300, style({ opacity: 1, transform: "translateX(0)", offset: 1.0}))
       ]),
-      transition("0 => 1",
+      transition(":leave",
       [
-        style({ height: 0 }),
-        animate(200, style({ height: "*" }))
-      ]),
+        style({ opacity: 1, transform: "translateX(0)", offset: 0}),
+        animate(300, style({ opacity: 0, transform: "translateX(-100%)", offset: 1.0}))
+      ])
     ])
   ],
   providers:
@@ -49,7 +47,7 @@ export class PokedexComponent implements OnInit
   toSort: string;
   asc: boolean;
 
-  constructor(private pokemonsService: PokemonsService, private skillsService: SkillsService, private typesService: TypesService, private sanitizer: DomSanitizer) {}
+  constructor(private pokemonsService: PokemonsService, private skillsService: SkillsService, private typesService: TypesService) {}
 
   getData(): void
   {
@@ -63,7 +61,7 @@ export class PokedexComponent implements OnInit
                     this.skills.push(new Skill(skillJson));
 
                   for (let pokemonJson of data[0])
-                    this.pokemons.push(new Pokemon(pokemonJson, this.skills, this.types, this.sanitizer));
+                    this.pokemons.push(new Pokemon(pokemonJson, this.skills, this.types));
                 },
                 err => console.log(err),
                 () => console.log("All data gotten!")

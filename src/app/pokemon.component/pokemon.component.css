@@ -1,0 +1,19 @@
+.card-header-image
+{
+  background-size: cover;
+}
+
+.card-content
+{
+  margin-top: 1rem;
+}
+
+.skills
+{
+  cursor: pointer;
+}
+
+.skill
+{
+  cursor: help;
+}

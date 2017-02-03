@@ -1,5 +1,3 @@
-import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
-
 import { SerializableHelper } from "../helpers/serializable.helper";
 
 import { Skill } from "../skill/skill"
@@ -34,18 +32,15 @@ export class Pokemon extends SerializableHelper
   type1: string;
   type2: string;
 
-  selected: boolean;
-
   lvlUpSkills: Skill[] = [];
 
-  constructor(pokemonJson: any, skills: Skill[], types: Type[], private sanitizer: DomSanitizer)
+  constructor(pokemonJson: any, skills: Skill[], types: Type[])
   {
     super();
 
     this.fillFromJson(pokemonJson);
     this.setSkills(skills, types);
     this.setTypes(types);
-    this.selected = false;
   }
 
   setTypes(types: Type[]): void
@@ -81,20 +76,5 @@ export class Pokemon extends SerializableHelper
             this.lvlUpSkills.push(skill);
             break;
           }
-  }
-
-  getImg(type: string): string
-  {
-    return "/images/" + type + "/" + this.id + this.ename + ".png";
-  }
-
-  getSprite(): SafeStyle
-  {
-    return this.sanitizer.bypassSecurityTrustStyle("url(\"/images/spr/" + this.id + "MS.png\")");
-  }
-
-  toggleSelected(): void
-  {
-    this.selected = !this.selected;
   }
 }

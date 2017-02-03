@@ -1,0 +1,44 @@
+<md-card>
+  <md-card-header>
+    <div md-card-avatar class="card-header-image" [style.background-image]="getHeaderImg()"></div>
+
+    <md-card-title>{{pokemon.id}} &#x000B7; {{pokemon.ename}}</md-card-title>
+
+    <md-card-subtitle>{{pokemon.type1}}<span *ngIf="pokemon.type2"> &#x02013; {{pokemon.type2}}</span></md-card-subtitle>
+
+    <button md-mini-fab (click)="toggleSelected()"><md-icon>{{(selected ? "expand_less" : "expand_more")}}</md-icon></button>
+  </md-card-header>
+
+  <div class="card-content" *ngIf="selected" [@details]>
+    <img md-card-image [src]="getImg('img')" />
+
+    <md-card-content>
+      <md-grid-list cols="2" rowHeight="2rem">
+        <md-grid-tile *ngFor="let stat of pokemon.base | keys">
+          {{stat.key}} : {{stat.value}}
+
+          <md-progress-bar [value]="(stat.value / 255) * 100"></md-progress-bar>
+        </md-grid-tile>
+      </md-grid-list>
+    </md-card-content>
+
+    <md-card-content>
+      <div class="skills" (click)="toggleSkills()">
+        <b>Level up skills</b>
+
+        <md-icon>{{(showSkills ? "expand_less" : "expand_more")}}</md-icon>
+      </div>
+
+      <md-grid-list cols="2" rowHeight="2rem"
+          *ngIf="showSkills" [@details]>
+        <md-grid-tile *ngFor="let lvlUpSkill of pokemon.lvlUpSkills; let odd = odd">
+          <span class="skill"
+              [mdTooltipPosition]="(odd ? 'before' : 'after')"
+              [mdTooltip]="lvlUpSkill.getDescription()">
+            {{lvlUpSkill.id}} &#x000B7; {{lvlUpSkill.ename}}
+          </span>
+        </md-grid-tile>
+      </md-grid-list>
+    </md-card-content>
+  </div>
+</md-card>

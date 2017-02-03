@@ -82,20 +82,8 @@
   </md-input-container>
 </md-toolbar>
 
-<md-nav-list>
-  <span *ngFor="let pokemon of (pokemons | filterBy:'ename':name | filterBy:'id':id | filterBy:'type1':type1 | filterBy:'type2':type2 | sortBy:toSort:asc)">
-    <md-list-item (click)="pokemon.toggleSelected()">
-      <img md-list-avatar [src]="pokemon.getImg('thm')" />
-
-      <h3 md-line>{{pokemon.id}} &#x000B7; {{pokemon.ename}}</h3>
-
-      <p md-line>
-        {{pokemon.type1}}<span *ngIf="pokemon.type2"> &#x02013; {{pokemon.type2}}</span>
-      </p>
-    </md-list-item>
-
-    <div [@pokemonSelected]="pokemon.selected">
-      <pokemonDetails *ngIf="pokemon.selected" [pokemon]="pokemon"></pokemonDetails>
-    </div>
-  </span>
-</md-nav-list>
+<div fxLayout="row" fxLayoutWrap>
+  <pkm *ngFor="let pokemon of (pokemons | filterBy:'ename':name | filterBy:'id':id | filterBy:'type1':type1 | filterBy:'type2':type2 | sortBy:toSort:asc)"
+      fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33.33" fxFlex.lg="25"
+      [pokemon]="pokemon" [@pkmInOut]></pkm>
+</div>

@@ -1,14 +1,4 @@
-md-toolbar
-{
-  padding: 1%;
-}
-
 .spacer
 {
   flex: 1 1 auto;
-}
-
-md-list-item
-{
-  background-color: #F0FFFF;
 }
