@@ -1,6 +1,8 @@
 import { animate, state, style, transition, trigger, Component, Input } from "@angular/core";
 import { DomSanitizer, SafeStyle } from "@angular/platform-browser";
 
+import { TypeColorsHelper } from "../helpers/typeColors.helper";
+
 import { Pokemon } from "../pokemon/pokemon";
 
 @Component(
@@ -14,13 +16,13 @@ import { Pokemon } from "../pokemon/pokemon";
       transition(":enter",
       [
         style({ height: 0 }),
-        animate(300, style({ height: "*" }))
+        animate(222, style({ height: "*" }))
       ]),
       transition(":leave",
       [
         style({ height: "*" }),
-        animate(300, style({ height: 0 }))
-      ]),
+        animate(222, style({ height: 0 }))
+      ])
     ])
   ]
 })
@@ -28,6 +30,8 @@ import { Pokemon } from "../pokemon/pokemon";
 export class PokemonComponent
 {
   @Input() pokemon: Pokemon;
+
+  typeColors: any = TypeColorsHelper;
 
   selected: boolean = false;
 
@@ -47,13 +51,8 @@ export class PokemonComponent
     return "/images/" + type + "/" + this.pokemon.id + this.pokemon.ename + ".png";
   }
 
-  toggleSelected(): void
+  toggle(toToggle: string): void
   {
-    this.selected = !this.selected;
-  }
-
-  toggleSkills(): void
-  {
-    this.showSkills = !this.showSkills;
+    this[toToggle] = !this[toToggle];
   }
 }

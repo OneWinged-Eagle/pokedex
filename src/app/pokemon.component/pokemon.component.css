@@ -1,16 +1,47 @@
+md-card
+{
+  margin: 1%;
+}
+
 .card-header-image
 {
+  background-color: #616161;
   background-size: cover;
 }
 
-.card-content
+md-card-title
 {
-  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.type
+{
+  border-radius: 1rem;
+  color: #424242;
+  font-weight: bolder;
+  padding: 0.1rem 0.4rem;
+}
+
+md-card-content
+{
+  margin-top: 3rem;
+}
+
+.md-card-image
+{
+  background-color: #616161;
+}
+
+.stat
+{
+  position: inherit;
+  top: 0;
 }
 
 .skills
 {
   cursor: pointer;
+  display: flex;
 }
 
 .skill

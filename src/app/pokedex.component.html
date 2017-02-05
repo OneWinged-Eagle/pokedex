@@ -1,18 +1,88 @@
 <md-toolbar color="primary">
   <h1>Pokedex</h1>
 
-  <span class="spacer"></span>
-
-  <md-input-container dividerColor="accent">
-    <input md-input placeholder="Search by name" [(ngModel)]="name"/>
-  </md-input-container>
-
-  <span class="spacer"></span>
+  <div class="spacer"></div>
 
   <button md-icon-button [md-menu-trigger-for]="menu">
-    <md-icon>more_vert</md-icon>
+    <md-icon>filter_list</md-icon>
   </button>
+
+  <md-toolbar-row>
+    <div class="spacer"></div>
+
+    <md-input-container dividerColor="accent">
+      <input md-input placeholder="Name" [(ngModel)]="name"/>
+    </md-input-container>
+
+    <div class="spacer"></div>
+
+    <md-input-container dividerColor="accent">
+      <input md-input placeholder="Number" [(ngModel)]="id">
+    </md-input-container>
+
+    <div class="spacer"></div>
+  </md-toolbar-row>
+
+  <md-toolbar-row>
+    <div class="spacer"></div>
+
+    <md-select placeholder="1st type" [(ngModel)]="type1">
+      <md-option [value]="">All</md-option>
+      <md-option *ngFor="let color of typeColors | keys" [style.background-color]="color.value" [value]="color.key">{{color.key}}</md-option>
+    </md-select>
+
+    <div class="spacer"></div>
+
+    <md-select placeholder="2nd type" [(ngModel)]="type2">
+      <md-option [value]="">All</md-option>
+      <md-option *ngFor="let color of typeColors | keys" [style.background-color]="color.value" [value]="color.key">{{color.key}}</md-option>
+    </md-select>
+
+    <div class="spacer"></div>
+  </md-toolbar-row>
 </md-toolbar>
+
+<md-toolbar class="bigToolbar" color="primary">
+  <h1>Pokedex</h1>
+
+  <div class="spacer"></div>
+
+  <md-input-container dividerColor="accent">
+    <input md-input placeholder="Name" [(ngModel)]="name"/>
+  </md-input-container>
+
+  <div class="spacer"></div>
+
+  <button md-icon-button [md-menu-trigger-for]="menu">
+    <md-icon>filter_list</md-icon>
+  </button>
+
+  <md-toolbar-row>
+    <md-input-container dividerColor="accent">
+      <input md-input placeholder="Number" [(ngModel)]="id">
+    </md-input-container>
+
+    <div class="spacer"></div>
+
+    <md-select placeholder="1st type" [(ngModel)]="type1">
+      <md-option [value]="">All</md-option>
+      <md-option *ngFor="let color of typeColors | keys" [style.background-color]="color.value" [value]="color.key">{{color.key}}</md-option>
+    </md-select>
+
+    <div class="spacer"></div>
+
+    <md-select placeholder="2nd type" [(ngModel)]="type2">
+      <md-option [value]="">All</md-option>
+      <md-option *ngFor="let color of typeColors | keys" [style.background-color]="color.value" [value]="color.key">{{color.key}}</md-option>
+    </md-select>
+  </md-toolbar-row>
+</md-toolbar>
+
+<div class="main" fxLayout="row" fxLayoutWrap>
+  <pkm *ngFor="let pokemon of (pokemons | filterBy:'ename':name | filterBy:'id':id | filterBy:'type1':type1 | filterBy:'type2':type2 | sortBy:toSort:asc)"
+      fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33.33" fxFlex.lg="25" fxFlex.gt-lg="20"
+      [pokemon]="pokemon" [@pkmInOut]></pkm>
+</div>
 
 <md-menu x-position="before" #menu="mdMenu">
   <button md-menu-item (click)="sortBy('ename', true)">
@@ -63,27 +133,3 @@
     <span>second type desc</span>
   </button>
 </md-menu>
-
-<md-toolbar color="primary">
-  <md-input-container dividerColor="accent">
-    <input md-input placeholder="Search by id" [(ngModel)]="id">
-  </md-input-container>
-
-  <span class="spacer"></span>
-
-  <md-input-container dividerColor="accent">
-    <input md-input placeholder="Search by first type" [(ngModel)]="type1">
-  </md-input-container>
-
-  <span class="spacer"></span>
-
-  <md-input-container dividerColor="accent">
-    <input md-input placeholder="Search by second type" [(ngModel)]="type2">
-  </md-input-container>
-</md-toolbar>
-
-<div fxLayout="row" fxLayoutWrap>
-  <pkm *ngFor="let pokemon of (pokemons | filterBy:'ename':name | filterBy:'id':id | filterBy:'type1':type1 | filterBy:'type2':type2 | sortBy:toSort:asc)"
-      fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="33.33" fxFlex.lg="25"
-      [pokemon]="pokemon" [@pkmInOut]></pkm>
-</div>

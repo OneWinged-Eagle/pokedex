@@ -1,6 +1,8 @@
 import { animate, state, style, transition, trigger, Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/Rx";
 
+import { TypeColorsHelper } from "./helpers/typeColors.helper";
+
 import { Pokemon } from "./pokemon/pokemon";
 import { PokemonsService } from "./pokemon/pokemons.service";
 
@@ -20,7 +22,7 @@ import { TypesService } from "./type/types.service";
       state("in", style({ transform: "translateX(0)" })),
       transition(":enter",
       [
-        style({ opacity: 0, transform: "translateX(100%)", offset: 0}),
+        style({ opacity: 0, transform: "translateX(-100%)", offset: 0}),
         animate(300, style({ opacity: 1, transform: "translateX(0)", offset: 1.0}))
       ]),
       transition(":leave",
@@ -46,6 +48,8 @@ export class PokedexComponent implements OnInit
 
   toSort: string;
   asc: boolean;
+
+  typeColors: any = TypeColorsHelper;
 
   constructor(private pokemonsService: PokemonsService, private skillsService: SkillsService, private typesService: TypesService) {}
 

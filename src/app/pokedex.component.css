@@ -1,4 +1,48 @@
-.spacer
+/* toolbar */
+md-toolbar
 {
-  flex: 1 1 auto;
+  display: none;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+.bigToolbar
+{
+  display: flex;
+}
+
+@media (max-width: 599px)
+{
+  md-toolbar
+  {
+    display: flex;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
+
+  .bigToolbar
+  {
+    display: none;
+  }
+}
+
+md-option
+{
+  background-color: white;
+}
+
+/* main content */
+.main
+{
+  margin-top: 8rem;
+}
+
+@media (max-width: 599px)
+{
+  .main
+  {
+    margin-top: 10.5rem;
+  }
 }
